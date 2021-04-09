@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F5000132620B4D2006333ED /* CountryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5000122620B4D2006333ED /* CountryTableViewCell.swift */; };
+		5F50001A2620C962006333ED /* JGProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 5F5000192620C962006333ED /* JGProgressHUD */; };
+		5F50001E2620CA2D006333ED /* DisplayHudProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F50001D2620CA2D006333ED /* DisplayHudProtocol.swift */; };
 		5F76F134261F7F4E00E8631D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F76F133261F7F4E00E8631D /* AppDelegate.swift */; };
 		5F76F136261F7F4E00E8631D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F76F135261F7F4E00E8631D /* SceneDelegate.swift */; };
 		5F76F13B261F7F4E00E8631D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F76F139261F7F4E00E8631D /* Main.storyboard */; };
@@ -23,6 +26,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5F5000122620B4D2006333ED /* CountryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryTableViewCell.swift; sourceTree = "<group>"; };
+		5F50001D2620CA2D006333ED /* DisplayHudProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayHudProtocol.swift; sourceTree = "<group>"; };
 		5F76F130261F7F4E00E8631D /* Covid Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Covid Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F76F133261F7F4E00E8631D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5F76F135261F7F4E00E8631D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -44,6 +49,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F76F14C261F823200E8631D /* Alamofire in Frameworks */,
+				5F50001A2620C962006333ED /* JGProgressHUD in Frameworks */,
 				5F76F150261F826000E8631D /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -51,6 +57,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5F5000152620B4E1006333ED /* TableCells */ = {
+			isa = PBXGroup;
+			children = (
+				5F5000122620B4D2006333ED /* CountryTableViewCell.swift */,
+			);
+			path = TableCells;
+			sourceTree = "<group>";
+		};
+		5F50001C2620C9D4006333ED /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				5F50001D2620CA2D006333ED /* DisplayHudProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		5F76F127261F7F4E00E8631D = {
 			isa = PBXGroup;
 			children = (
@@ -70,6 +92,8 @@
 		5F76F132261F7F4E00E8631D /* Covid Tracker */ = {
 			isa = PBXGroup;
 			children = (
+				5F50001C2620C9D4006333ED /* Protocols */,
+				5F5000152620B4E1006333ED /* TableCells */,
 				5F76F17C261F92C400E8631D /* Extensions */,
 				5F76F183261F973B00E8631D /* API */,
 				5F76F15F261F864500E8631D /* Views */,
@@ -145,6 +169,7 @@
 			packageProductDependencies = (
 				5F76F14B261F823200E8631D /* Alamofire */,
 				5F76F14F261F826000E8631D /* SnapKit */,
+				5F5000192620C962006333ED /* JGProgressHUD */,
 			);
 			productName = "Covid Tracker";
 			productReference = 5F76F130261F7F4E00E8631D /* Covid Tracker.app */;
@@ -176,6 +201,7 @@
 			packageReferences = (
 				5F76F14A261F823200E8631D /* XCRemoteSwiftPackageReference "Alamofire" */,
 				5F76F14E261F826000E8631D /* XCRemoteSwiftPackageReference "SnapKit" */,
+				5F5000182620C962006333ED /* XCRemoteSwiftPackageReference "JGProgressHUD" */,
 			);
 			productRefGroup = 5F76F131261F7F4E00E8631D /* Products */;
 			projectDirPath = "";
@@ -204,10 +230,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F5000132620B4D2006333ED /* CountryTableViewCell.swift in Sources */,
 				5F76F134261F7F4E00E8631D /* AppDelegate.swift in Sources */,
 				5F76F17E261F92D800E8631D /* UIColor.swift in Sources */,
 				5F76F136261F7F4E00E8631D /* SceneDelegate.swift in Sources */,
 				5F76F15D261F863B00E8631D /* NavigationView.swift in Sources */,
+				5F50001E2620CA2D006333ED /* DisplayHudProtocol.swift in Sources */,
 				5F76F18A261F984300E8631D /* Country.swift in Sources */,
 				5F76F154261F839000E8631D /* HomeViewController.swift in Sources */,
 				5F76F15A261F857000E8631D /* CountryPickerViewController.swift in Sources */,
@@ -413,6 +441,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		5F5000182620C962006333ED /* XCRemoteSwiftPackageReference "JGProgressHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/JonasGessner/JGProgressHUD.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.0;
+			};
+		};
 		5F76F14A261F823200E8631D /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -432,6 +468,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		5F5000192620C962006333ED /* JGProgressHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5F5000182620C962006333ED /* XCRemoteSwiftPackageReference "JGProgressHUD" */;
+			productName = JGProgressHUD;
+		};
 		5F76F14B261F823200E8631D /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 5F76F14A261F823200E8631D /* XCRemoteSwiftPackageReference "Alamofire" */;
