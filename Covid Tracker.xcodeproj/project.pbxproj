@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F481B762625FAB10040F58D /* GlobalResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F481B752625FAB10040F58D /* GlobalResponse.swift */; };
+		5F481B79262603E50040F58D /* Int64+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F481B78262603E50040F58D /* Int64+Extensions.swift */; };
+		5F481B7D2626129F0040F58D /* CountryCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F481B7C2626129F0040F58D /* CountryCollectionCell.swift */; };
 		5F5000132620B4D2006333ED /* CountryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5000122620B4D2006333ED /* CountryTableViewCell.swift */; };
 		5F50001A2620C962006333ED /* JGProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 5F5000192620C962006333ED /* JGProgressHUD */; };
 		5F50001E2620CA2D006333ED /* DisplayHudProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F50001D2620CA2D006333ED /* DisplayHudProtocol.swift */; };
@@ -26,6 +29,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5F481B752625FAB10040F58D /* GlobalResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalResponse.swift; sourceTree = "<group>"; };
+		5F481B78262603E50040F58D /* Int64+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int64+Extensions.swift"; sourceTree = "<group>"; };
+		5F481B7C2626129F0040F58D /* CountryCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCollectionCell.swift; sourceTree = "<group>"; };
 		5F5000122620B4D2006333ED /* CountryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryTableViewCell.swift; sourceTree = "<group>"; };
 		5F50001D2620CA2D006333ED /* DisplayHudProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayHudProtocol.swift; sourceTree = "<group>"; };
 		5F76F130261F7F4E00E8631D /* Covid Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Covid Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -57,6 +63,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5F481B7B262612730040F58D /* CollectionCells */ = {
+			isa = PBXGroup;
+			children = (
+				5F481B7C2626129F0040F58D /* CountryCollectionCell.swift */,
+			);
+			path = CollectionCells;
+			sourceTree = "<group>";
+		};
 		5F5000152620B4E1006333ED /* TableCells */ = {
 			isa = PBXGroup;
 			children = (
@@ -92,6 +106,7 @@
 		5F76F132261F7F4E00E8631D /* Covid Tracker */ = {
 			isa = PBXGroup;
 			children = (
+				5F481B7B262612730040F58D /* CollectionCells */,
 				5F50001C2620C9D4006333ED /* Protocols */,
 				5F5000152620B4E1006333ED /* TableCells */,
 				5F76F17C261F92C400E8631D /* Extensions */,
@@ -129,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				5F76F17D261F92D800E8631D /* UIColor.swift */,
+				5F481B78262603E50040F58D /* Int64+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -146,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				5F76F189261F984300E8631D /* Country.swift */,
+				5F481B752625FAB10040F58D /* GlobalResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -230,10 +247,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F481B762625FAB10040F58D /* GlobalResponse.swift in Sources */,
 				5F5000132620B4D2006333ED /* CountryTableViewCell.swift in Sources */,
 				5F76F134261F7F4E00E8631D /* AppDelegate.swift in Sources */,
+				5F481B7D2626129F0040F58D /* CountryCollectionCell.swift in Sources */,
 				5F76F17E261F92D800E8631D /* UIColor.swift in Sources */,
 				5F76F136261F7F4E00E8631D /* SceneDelegate.swift in Sources */,
+				5F481B79262603E50040F58D /* Int64+Extensions.swift in Sources */,
 				5F76F15D261F863B00E8631D /* NavigationView.swift in Sources */,
 				5F50001E2620CA2D006333ED /* DisplayHudProtocol.swift in Sources */,
 				5F76F18A261F984300E8631D /* Country.swift in Sources */,

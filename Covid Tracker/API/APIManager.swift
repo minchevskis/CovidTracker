@@ -9,6 +9,7 @@ import Foundation
 import Alamofire
 
 typealias CountriesResultCompletion = ((Result<[Country], Error>) -> Void)
+typealias GlobalInfoCompletion = ((Result<Global, Error>) -> Void)
 
 class APIManager {
     static let shared = APIManager()
@@ -21,6 +22,17 @@ class APIManager {
                 completion(.failure(error))
             case .success(let countries):
                 completion(.success(countries))
+            }
+        }
+    }
+    
+    func getGlobalInfo(completion: @escaping (GlobalInfoCompletion)) {
+        AF.request("https://api.covid19api.com/summary", method: .get).responseDecodable(of: GlobalResponse.self) { (response) in
+            switch response.result {
+            case .failure(let error):
+                completion(.failure(error))
+            case .success(let globalResponse):
+                completion(.success(globalResponse.global))
             }
         }
     }
