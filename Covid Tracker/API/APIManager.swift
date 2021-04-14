@@ -10,6 +10,7 @@ import Alamofire
 
 typealias CountriesResultCompletion = ((Result<[Country], Error>) -> Void)
 typealias GlobalInfoCompletion = ((Result<Global, Error>) -> Void)
+typealias ComfirmedCasesByDayCompletion = ((Result<[ConfirmedCasesByDay], Error>) -> Void)
 
 class APIManager {
     static let shared = APIManager()
@@ -33,6 +34,36 @@ class APIManager {
                 completion(.failure(error))
             case .success(let globalResponse):
                 completion(.success(globalResponse.global))
+            }
+        }
+    }
+    
+    func getConfirmedCases(for country: String, from: Date? = nil, to: Date? = nil, completion: @escaping ComfirmedCasesByDayCompletion) {
+        
+        let fetchTodaysDate = (from == nil && to == nil) ? Date().minus(days: 1) : nil
+        
+        var urlString = "https://api.covid19api.com/country/" + country + "/status/confirmed/live?"
+        
+        if let today = fetchTodaysDate{
+            urlString = urlString + "from=" + DateFormatter.isoFullFormater.string(from: today)
+        } else {
+            urlString = urlString + "from=" + DateFormatter.isoFullFormater.string(from: from!) + "&to=" + DateFormatter.isoFullFormater.string(from: to!)
+        }
+        
+        let jsonDecoder = JSONDecoder()
+        jsonDecoder.dateDecodingStrategy = .formatted(DateFormatter.isoFullFormater)
+        
+        AF.request(urlString).responseData { (response) in
+            switch response.result {
+            case .success(let data):
+                do {
+                    let days = try jsonDecoder.decode([ConfirmedCasesByDay].self, from: data)
+                    completion(.success(days))
+                } catch {
+                    print(error.localizedDescription)
+                }
+            case .failure(let error):
+                completion(.failure(error))
             }
         }
     }

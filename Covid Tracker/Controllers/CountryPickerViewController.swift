@@ -8,7 +8,11 @@
 import UIKit
 import JGProgressHUD
 
-class CountryPickerViewController: UIViewController, DisplayHudProtocol {
+protocol ReloadDataDelegate: AnyObject {
+    func reloadCountriesData()
+}
+
+class CountryPickerViewController: UIViewController, DisplayHudProtocol, Alertable {
 
     @IBOutlet weak var navigationHolderView: UIView!
     @IBOutlet weak var tableView: UITableView!
@@ -16,6 +20,7 @@ class CountryPickerViewController: UIViewController, DisplayHudProtocol {
     private var countries = [Country]()
     
     var hud: JGProgressHUD?
+    weak var delegate: ReloadDataDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +54,7 @@ class CountryPickerViewController: UIViewController, DisplayHudProtocol {
             
             switch result {
             case .failure(let error):
-                print(error.localizedDescription)
+                self?.showErrorAlert(error)
             case .success(let countries):
                 self?.countries = countries.sorted(by: { $0.name < $1.name })
                 self?.tableView.reloadData()
@@ -72,16 +77,13 @@ extension CountryPickerViewController: UITableViewDataSource, UITableViewDelegat
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        
-    }
 }
 
 extension CountryPickerViewController: CountySelectionDelegate {
     func didChangeValueOn(country: Country) {
         guard let index = countries.firstIndex(where: { $0.isoCode == country.isoCode }) else { return }
         tableView.reloadRows(at: [IndexPath(item: index, section: 0)], with: .none)
+        delegate?.reloadCountriesData()
     }
     
     

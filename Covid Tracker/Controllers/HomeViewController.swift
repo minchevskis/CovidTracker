@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import JGProgressHUD
 
-class HomeViewController: UIViewController, DisplayHudProtocol {
+class HomeViewController: UIViewController, DisplayHudProtocol, Alertable {
 
     @IBOutlet weak var navigationHolderView: UIView!
     @IBOutlet weak var btnAddCountry: UIButton!
@@ -22,6 +22,7 @@ class HomeViewController: UIViewController, DisplayHudProtocol {
     @IBOutlet weak var collectionView: UICollectionView!
     
     private var selectedCountries = [Country]()
+    private(set) var allCountries = [Country]()
     
     var hud: JGProgressHUD?
     
@@ -62,7 +63,7 @@ class HomeViewController: UIViewController, DisplayHudProtocol {
             switch result {
             case .failure(let error):
                 self.btnRetry.isHidden = false
-                print(error.localizedDescription)
+                self.showErrorAlert(error)
             case .success(let global):
                 self.btnRetry.isHidden = true
                 self.setGlobalData(global: global)
@@ -75,13 +76,12 @@ class HomeViewController: UIViewController, DisplayHudProtocol {
         
         APIManager.shared.getAllCountries { [weak self] (result) in
             self?.displayHud(false)
-            
             switch result {
             case .failure(let error):
-                print(error.localizedDescription)
+                self?.showErrorAlert(error)
             case .success(let countries):
-                self?.selectedCountries = countries.filter { $0.isSelected }
-                self?.collectionView.reloadData()
+                self?.allCountries = countries
+                self?.reloadCountriesData()
             }
         }
     }
@@ -117,6 +117,20 @@ class HomeViewController: UIViewController, DisplayHudProtocol {
     @IBAction func onRetryPressed(_ sender: UIButton) {
         getGlobalData()
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "countriesSegue" {
+            let controller = segue.destination as! CountryPickerViewController
+            controller.delegate = self
+        }
+    }
+}
+
+extension HomeViewController: ReloadDataDelegate {
+    func reloadCountriesData() {
+        selectedCountries = allCountries.filter { $0.isSelected }
+        collectionView.reloadData()
+    }
 }
 
 
@@ -128,8 +142,7 @@ extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "countryCell", for: indexPath) as! CountryCollectionCell
             let country = selectedCountries[indexPath.row]
-            cell.lblCountryName.text = country.name
-            cell.lblCasesNumber.text = "0"
+            cell.setCountryData(country)
             cell.shadowView.layer.cornerRadius = 8
             cell.shadowView.layer.shadowColor = UIColor.black.withAlphaComponent(0.05).cgColor
             cell.shadowView.layer.shadowOpacity = 1.0
@@ -139,8 +152,6 @@ extension HomeViewController: UICollectionViewDataSource {
             cell.contentView.layer.masksToBounds = true
             return cell
         }
-    
-    
 }
 
 

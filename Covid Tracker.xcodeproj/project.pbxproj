@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F3592082627507D002453EE /* Alertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3592072627507D002453EE /* Alertable.swift */; };
+		5F35920B26275144002453EE /* UIAlertController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F35920A26275144002453EE /* UIAlertController+Extensions.swift */; };
+		5F35920E26275545002453EE /* ConfirmedCaseDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F35920D26275545002453EE /* ConfirmedCaseDay.swift */; };
+		5F35921126275611002453EE /* DateDormater+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F35921026275611002453EE /* DateDormater+Ext.swift */; };
+		5F359214262765BE002453EE /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F359213262765BE002453EE /* Date.swift */; };
 		5F481B762625FAB10040F58D /* GlobalResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F481B752625FAB10040F58D /* GlobalResponse.swift */; };
 		5F481B79262603E50040F58D /* Int64+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F481B78262603E50040F58D /* Int64+Extensions.swift */; };
 		5F481B7D2626129F0040F58D /* CountryCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F481B7C2626129F0040F58D /* CountryCollectionCell.swift */; };
@@ -29,6 +34,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5F3592072627507D002453EE /* Alertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alertable.swift; sourceTree = "<group>"; };
+		5F35920A26275144002453EE /* UIAlertController+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extensions.swift"; sourceTree = "<group>"; };
+		5F35920D26275545002453EE /* ConfirmedCaseDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmedCaseDay.swift; sourceTree = "<group>"; };
+		5F35921026275611002453EE /* DateDormater+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateDormater+Ext.swift"; sourceTree = "<group>"; };
+		5F359213262765BE002453EE /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		5F481B752625FAB10040F58D /* GlobalResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalResponse.swift; sourceTree = "<group>"; };
 		5F481B78262603E50040F58D /* Int64+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int64+Extensions.swift"; sourceTree = "<group>"; };
 		5F481B7C2626129F0040F58D /* CountryCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCollectionCell.swift; sourceTree = "<group>"; };
@@ -83,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				5F50001D2620CA2D006333ED /* DisplayHudProtocol.swift */,
+				5F3592072627507D002453EE /* Alertable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -143,8 +154,11 @@
 		5F76F17C261F92C400E8631D /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				5F359213262765BE002453EE /* Date.swift */,
 				5F76F17D261F92D800E8631D /* UIColor.swift */,
 				5F481B78262603E50040F58D /* Int64+Extensions.swift */,
+				5F35920A26275144002453EE /* UIAlertController+Extensions.swift */,
+				5F35921026275611002453EE /* DateDormater+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -163,6 +177,7 @@
 			children = (
 				5F76F189261F984300E8631D /* Country.swift */,
 				5F481B752625FAB10040F58D /* GlobalResponse.swift */,
+				5F35920D26275545002453EE /* ConfirmedCaseDay.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -248,14 +263,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F481B762625FAB10040F58D /* GlobalResponse.swift in Sources */,
+				5F35921126275611002453EE /* DateDormater+Ext.swift in Sources */,
 				5F5000132620B4D2006333ED /* CountryTableViewCell.swift in Sources */,
+				5F35920E26275545002453EE /* ConfirmedCaseDay.swift in Sources */,
 				5F76F134261F7F4E00E8631D /* AppDelegate.swift in Sources */,
 				5F481B7D2626129F0040F58D /* CountryCollectionCell.swift in Sources */,
 				5F76F17E261F92D800E8631D /* UIColor.swift in Sources */,
+				5F359214262765BE002453EE /* Date.swift in Sources */,
 				5F76F136261F7F4E00E8631D /* SceneDelegate.swift in Sources */,
 				5F481B79262603E50040F58D /* Int64+Extensions.swift in Sources */,
 				5F76F15D261F863B00E8631D /* NavigationView.swift in Sources */,
+				5F3592082627507D002453EE /* Alertable.swift in Sources */,
 				5F50001E2620CA2D006333ED /* DisplayHudProtocol.swift in Sources */,
+				5F35920B26275144002453EE /* UIAlertController+Extensions.swift in Sources */,
 				5F76F18A261F984300E8631D /* Country.swift in Sources */,
 				5F76F154261F839000E8631D /* HomeViewController.swift in Sources */,
 				5F76F15A261F857000E8631D /* CountryPickerViewController.swift in Sources */,
