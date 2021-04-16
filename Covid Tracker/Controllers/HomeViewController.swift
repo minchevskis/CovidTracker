@@ -32,6 +32,7 @@ class HomeViewController: UIViewController, DisplayHudProtocol, Alertable {
         addNavigationView()
         setupGlobalHolder()
         getGlobalData()
+        collectionView.delegate   = self
         collectionView.dataSource = self
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.itemSize = CGSize(width: 165, height: 70)
@@ -153,6 +154,22 @@ extension HomeViewController: UICollectionViewDataSource {
             return cell
         }
 }
+
+extension HomeViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+         return CGSize(width: 165, height: 70)
+     }
+     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+         return 10
+     }
+     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+         return UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+     }
+     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+         return 10
+     }
+}
+
 
 
 

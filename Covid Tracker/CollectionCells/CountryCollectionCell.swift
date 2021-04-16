@@ -33,7 +33,7 @@ class CountryCollectionCell: UICollectionViewCell {
                 
                 let sorted = casesByDay.sorted(by: { $0.date > $1.date })
                 if let today = sorted.first {
-                    self.lblCasesNumber.text = "\(today.cases)"
+                    self.lblCasesNumber.text = "\(Int64(today.cases).getFormatedNumber())."
                 }
             }
         }
