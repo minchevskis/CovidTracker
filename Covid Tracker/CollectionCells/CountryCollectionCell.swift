@@ -17,6 +17,8 @@ class CountryCollectionCell: UICollectionViewCell {
     
     var country: Country?
     
+    private let api = WebService()
+    
     func setCountryData(_ country: Country) {
         self.country = country
         lblCountryName.text = country.name
@@ -24,7 +26,8 @@ class CountryCollectionCell: UICollectionViewCell {
     }
     
     private func getComfirmedCases(_ country: Country) {
-        APIManager.shared.getConfirmedCases(for: country.slug) { (result) in
+        
+        api.request(CountryAPI.getConfirmedCases(country, Date().minus(days: 1), Date())) { (_ result: Result<[ConfirmedCasesByDay], Error>) -> Void in
             switch result {
             case .failure(let error):
                 print(error.localizedDescription)
@@ -37,5 +40,19 @@ class CountryCollectionCell: UICollectionViewCell {
                 }
             }
         }
+        
+//        APIManager.shared.getConfirmedCases(for: country.slug) { (result) in
+//            switch result {
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//            case .success(let casesByDay):
+//                print(casesByDay.count)
+//
+//                let sorted = casesByDay.sorted(by: { $0.date > $1.date })
+//                if let today = sorted.first {
+//                    self.lblCasesNumber.text = "\(Int64(today.cases).getFormatedNumber())."
+//                }
+//            }
+//        }
     }
 }

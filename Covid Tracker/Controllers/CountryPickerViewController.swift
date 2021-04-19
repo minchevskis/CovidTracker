@@ -24,6 +24,10 @@ class CountryPickerViewController: UIViewController, DisplayHudProtocol, Alertab
     var hud: JGProgressHUD?
     weak var delegate: ReloadDataDelegate?
     
+    var userDidTapSearch = false
+    
+    private let api = WebService()
+    
     private var searchController = UISearchController(searchResultsController: nil)
     
     var countriesDataSource: [Country] {
@@ -83,9 +87,8 @@ class CountryPickerViewController: UIViewController, DisplayHudProtocol, Alertab
     
     private func fetchCountries() {
         displayHud(true)
-        APIManager.shared.getAllCountries { [weak self] (result) in
-            self?.displayHud(false)
-            
+        
+        api.request(CountriesAPI.getAllCountries) { [weak self] (_ result: Result<[Country], Error>)-> Void in
             switch result {
             case .failure(let error):
                 self?.showErrorAlert(error)
@@ -94,6 +97,20 @@ class CountryPickerViewController: UIViewController, DisplayHudProtocol, Alertab
                 self?.tableView.reloadData()
             }
         }
+        
+    // this is another way to getAllCountries
+        
+//        APIManager.shared.getAllCountries { [weak self] (result) in
+//            self?.displayHud(false)
+//
+//            switch result {
+//            case .failure(let error):
+//                self?.showErrorAlert(error)
+//            case .success(let countries):
+//                self?.countries = countries.sorted(by: { $0.name < $1.name })
+//                self?.tableView.reloadData()
+//            }
+//        }
     }
     
     private func configureSegmentControl() {

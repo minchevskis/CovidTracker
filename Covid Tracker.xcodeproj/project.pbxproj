@@ -31,6 +31,11 @@
 		5F76F17E261F92D800E8631D /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F76F17D261F92D800E8631D /* UIColor.swift */; };
 		5F76F186261F982300E8631D /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F76F185261F982300E8631D /* APIManager.swift */; };
 		5F76F18A261F984300E8631D /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F76F189261F984300E8631D /* Country.swift */; };
+		5FC2EFAD262DE7BA004538A6 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC2EFAC262DE7BA004538A6 /* Endpoint.swift */; };
+		5FC2EFB0262DECFB004538A6 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC2EFAF262DECFB004538A6 /* WebService.swift */; };
+		5FC2EFB3262DFBB5004538A6 /* CountriesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC2EFB2262DFBB5004538A6 /* CountriesAPI.swift */; };
+		5FC2EFB9262E005D004538A6 /* CountryAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC2EFB8262E005D004538A6 /* CountryAPI.swift */; };
+		5FC2EFBD262E03A5004538A6 /* GlobalAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC2EFBC262E03A5004538A6 /* GlobalAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +62,11 @@
 		5F76F17D261F92D800E8631D /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		5F76F185261F982300E8631D /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		5F76F189261F984300E8631D /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
+		5FC2EFAC262DE7BA004538A6 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		5FC2EFAF262DECFB004538A6 /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
+		5FC2EFB2262DFBB5004538A6 /* CountriesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountriesAPI.swift; sourceTree = "<group>"; };
+		5FC2EFB8262E005D004538A6 /* CountryAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryAPI.swift; sourceTree = "<group>"; };
+		5FC2EFBC262E03A5004538A6 /* GlobalAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +178,11 @@
 			children = (
 				5F76F184261F974700E8631D /* Models */,
 				5F76F185261F982300E8631D /* APIManager.swift */,
+				5FC2EFAC262DE7BA004538A6 /* Endpoint.swift */,
+				5FC2EFAF262DECFB004538A6 /* WebService.swift */,
+				5FC2EFB2262DFBB5004538A6 /* CountriesAPI.swift */,
+				5FC2EFB8262E005D004538A6 /* CountryAPI.swift */,
+				5FC2EFBC262E03A5004538A6 /* GlobalAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -274,11 +289,16 @@
 				5F481B79262603E50040F58D /* Int64+Extensions.swift in Sources */,
 				5F76F15D261F863B00E8631D /* NavigationView.swift in Sources */,
 				5F3592082627507D002453EE /* Alertable.swift in Sources */,
+				5FC2EFAD262DE7BA004538A6 /* Endpoint.swift in Sources */,
 				5F50001E2620CA2D006333ED /* DisplayHudProtocol.swift in Sources */,
 				5F35920B26275144002453EE /* UIAlertController+Extensions.swift in Sources */,
+				5FC2EFBD262E03A5004538A6 /* GlobalAPI.swift in Sources */,
 				5F76F18A261F984300E8631D /* Country.swift in Sources */,
 				5F76F154261F839000E8631D /* HomeViewController.swift in Sources */,
 				5F76F15A261F857000E8631D /* CountryPickerViewController.swift in Sources */,
+				5FC2EFB9262E005D004538A6 /* CountryAPI.swift in Sources */,
+				5FC2EFB0262DECFB004538A6 /* WebService.swift in Sources */,
+				5FC2EFB3262DFBB5004538A6 /* CountriesAPI.swift in Sources */,
 				5F76F186261F982300E8631D /* APIManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

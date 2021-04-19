@@ -10,7 +10,7 @@ import SnapKit
 import JGProgressHUD
 
 class HomeViewController: UIViewController, DisplayHudProtocol, Alertable {
-
+    
     @IBOutlet weak var navigationHolderView: UIView!
     @IBOutlet weak var btnAddCountry: UIButton!
     @IBOutlet weak var globalHolderView: UIView!
@@ -25,6 +25,7 @@ class HomeViewController: UIViewController, DisplayHudProtocol, Alertable {
     private(set) var allCountries = [Country]()
     
     var hud: JGProgressHUD?
+    var api = WebService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,90 +58,105 @@ class HomeViewController: UIViewController, DisplayHudProtocol, Alertable {
     }
     
     private func getGlobalData() {
-        displayHud(true)
-        APIManager.shared.getGlobalInfo { [weak self] (result) in
+        
+        api.request(GlobalAPI.getSummary) { [weak self] (_ result: Result<GlobalResponse, Error>) -> Void in
             guard let self = self else { return }
             self.displayHud(false)
             switch result {
             case .failure(let error):
                 self.btnRetry.isHidden = false
                 self.showErrorAlert(error)
-            case .success(let global):
+            case .success(let globalResponse):
                 self.btnRetry.isHidden = true
-                self.setGlobalData(global: global)
+                self.setGlobalData(global: globalResponse.global)
+            }
+        }
+    }
+        
+        //        displayHud(true)
+        //        APIManager.shared.getGlobalInfo { [weak self] (result) in
+        //            guard let self = self else { return }
+        //            self.displayHud(false)
+        //            switch result {
+        //            case .failure(let error):
+        //                self.btnRetry.isHidden = false
+        //                self.showErrorAlert(error)
+        //            case .success(let global):
+        //                self.btnRetry.isHidden = true
+        //                self.setGlobalData(global: global)
+        //            }
+        //        }
+        //    }
+        
+        private func fetchCountries() {
+            displayHud(true)
+            
+            APIManager.shared.getAllCountries { [weak self] (result) in
+                self?.displayHud(false)
+                switch result {
+                case .failure(let error):
+                    self?.showErrorAlert(error)
+                case .success(let countries):
+                    self?.allCountries = countries
+                    self?.reloadCountriesData()
+                }
+            }
+        }
+        
+        private func setGlobalData(global: Global) {
+            lblDeaths.text = global.deaths.getFormatedNumber()
+            lblRecovered.text = global.recovered.getFormatedNumber()
+            lblConfirmed.text = global.confirmed.getFormatedNumber()
+            setFormatedLastUpdate()
+        }
+        
+        private func setFormatedLastUpdate() {
+            let date = Date()
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd/MM/yyyy, h:mm a"
+            let formatedDate = dateFormatter.string(from: date)
+            let updated = "Last Updated on " + formatedDate
+            let text = "Confirmed Cases\n" + updated
+            
+            let attributed = NSMutableAttributedString(string: text)
+            attributed.addAttributes([.font: UIFont.systemFont(ofSize: 16, weight: .bold),.foregroundColor: UIColor(hex: "3C3C3C") ],
+                                     range: (text as NSString).range(of: text))
+            attributed.addAttributes([.font: UIFont.systemFont(ofSize: 14, weight: .regular),.foregroundColor: UIColor(hex: "707070") ],
+                                     range: (text as NSString).range(of: updated))
+            
+            lblLastUpdate.attributedText = attributed
+        }
+        
+        @IBAction func onAddCountry(_ sender: UIButton) {
+            performSegue(withIdentifier: "countriesSegue", sender: nil)
+        }
+        
+        @IBAction func onRetryPressed(_ sender: UIButton) {
+            getGlobalData()
+        }
+        
+        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            if segue.identifier == "countriesSegue" {
+                let controller = segue.destination as! CountryPickerViewController
+                controller.delegate = self
             }
         }
     }
     
-    private func fetchCountries() {
-        displayHud(true)
-        
-        APIManager.shared.getAllCountries { [weak self] (result) in
-            self?.displayHud(false)
-            switch result {
-            case .failure(let error):
-                self?.showErrorAlert(error)
-            case .success(let countries):
-                self?.allCountries = countries
-                self?.reloadCountriesData()
-            }
+    extension HomeViewController: ReloadDataDelegate {
+        func reloadCountriesData() {
+            selectedCountries = allCountries.filter { $0.isSelected }
+            collectionView.reloadData()
         }
     }
     
-    private func setGlobalData(global: Global) {
-        lblDeaths.text = global.deaths.getFormatedNumber()
-        lblRecovered.text = global.recovered.getFormatedNumber()
-        lblConfirmed.text = global.confirmed.getFormatedNumber()
-        setFormatedLastUpdate()
-    }
     
-    private func setFormatedLastUpdate() {
-        let date = Date()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy, h:mm a"
-        let formatedDate = dateFormatter.string(from: date)
-        let updated = "Last Updated on " + formatedDate
-        let text = "Confirmed Cases\n" + updated
-        
-        let attributed = NSMutableAttributedString(string: text)
-        attributed.addAttributes([.font: UIFont.systemFont(ofSize: 16, weight: .bold),.foregroundColor: UIColor(hex: "3C3C3C") ],
-            range: (text as NSString).range(of: text))
-        attributed.addAttributes([.font: UIFont.systemFont(ofSize: 14, weight: .regular),.foregroundColor: UIColor(hex: "707070") ],
-            range: (text as NSString).range(of: updated))
-        
-        lblLastUpdate.attributedText = attributed
-    }
-    
-    @IBAction func onAddCountry(_ sender: UIButton) {
-        performSegue(withIdentifier: "countriesSegue", sender: nil)
-    }
-    
-    @IBAction func onRetryPressed(_ sender: UIButton) {
-        getGlobalData()
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "countriesSegue" {
-            let controller = segue.destination as! CountryPickerViewController
-            controller.delegate = self
+    extension HomeViewController: UICollectionViewDataSource {
+        func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+            return selectedCountries.count
         }
-    }
-}
-
-extension HomeViewController: ReloadDataDelegate {
-    func reloadCountriesData() {
-        selectedCountries = allCountries.filter { $0.isSelected }
-        collectionView.reloadData()
-    }
-}
-
-
-extension HomeViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return selectedCountries.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "countryCell", for: indexPath) as! CountryCollectionCell
             let country = selectedCountries[indexPath.row]
             cell.setCountryData(country)
@@ -153,22 +169,22 @@ extension HomeViewController: UICollectionViewDataSource {
             cell.contentView.layer.masksToBounds = true
             return cell
         }
-}
-
-extension HomeViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-         return CGSize(width: 165, height: 70)
-     }
-     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-         return 10
-     }
-     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-         return UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
-     }
-     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-         return 10
-     }
-}
+    }
+    
+    extension HomeViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+            return CGSize(width: 165, height: 70)
+        }
+        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+            return 10
+        }
+        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+            return UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        }
+        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+            return 10
+        }
+    }
 
 
 
